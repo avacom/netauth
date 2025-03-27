@@ -15,4 +15,19 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Properties\TLS\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Properties\TLS\localhost.crt" />
+      <Content Include="Properties\TLS\localhost.crt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Properties\TLS\localhost.key" />
+      <Content Include="Properties\TLS\localhost.key">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

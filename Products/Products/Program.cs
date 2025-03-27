@@ -1,6 +1,18 @@
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var certPath = Path.Combine(builder.Environment.ContentRootPath, "Properties", "TLS", "localhost.crt");
+var keyPath = Path.Combine(builder.Environment.ContentRootPath, "Properties", "TLS", "localhost.key");
+
+var certificate = X509Certificate2.CreateFromPemFile(certPath, keyPath);
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(3000); // HTTP (no HTTPS)
+    options.ListenAnyIP(3001, listenOptions => listenOptions.UseHttps(certificate)); // HTTPS only
+});
 
 // Add services to the container.
 
@@ -24,6 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection(); // Enforce HTTPS
 app.UseAuthorization();
 
 app.MapControllers();
