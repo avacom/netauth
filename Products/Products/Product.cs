@@ -12,12 +12,14 @@ public class Product
     /// <param name="name">Product name.</param>
     /// <param name="description">Product description.</param>
     /// <param name="price">Product price.</param>
-    public Product(int id, string name, string description, double price)
+    /// <param name="creator">Creator of the product.</param>
+    public Product(int id, string name, string description, double price, string creator = "")
     {
         Id = id;
         Name = name;
         Description = description;
         Price = price;
+        Creator = creator;
     }
 
     /// <summary>
@@ -39,4 +41,9 @@ public class Product
     /// Gets or sets the product price.
     /// </summary>
     public double Price { get; set; }
+
+    /// <summary>
+    /// Creator of the product.
+    /// </summary>
+    public string Creator { get; set; }
 }
